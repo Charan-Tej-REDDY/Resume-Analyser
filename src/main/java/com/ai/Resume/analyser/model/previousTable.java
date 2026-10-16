@@ -21,6 +21,11 @@ public class previousTable {
     private int score;
     private int atsoptimizationscore;
     private String roles;
+    private Integer jobDescriptionMatchScore;
+
+    @ElementCollection
+    @Column(length = 150)
+    private List<String> missingKeywords;
 
     @ElementCollection
     @Column(length = 450)

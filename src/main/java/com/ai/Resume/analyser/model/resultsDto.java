@@ -15,6 +15,8 @@ public class resultsDto {
 
     private  int score;
     private int atsoptimizationscore;
+    private Integer jobDescriptionMatchScore;
+    private List<String> missingKeywords;
     private List<String> pros;
     private List<String> cons;
     private List<String> suggestions;

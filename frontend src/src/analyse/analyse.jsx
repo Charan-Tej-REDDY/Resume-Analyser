@@ -7,6 +7,8 @@ function Analyse() {
     const navigate = useNavigate()
     const [score, setscore] = useState(0)
     const [atsscore, setatsscore] = useState(0)
+    const [jobMatchScore, setJobMatchScore] = useState(null)
+    const [missingKeywords, setMissingKeywords] = useState([])
     const [pros, setpros] = useState([])
     const [cons, setcons] = useState([])
     const [sug, setsug] = useState([])
@@ -30,6 +32,8 @@ function Analyse() {
                 if (data != null) {
                     setscore(data.score)
                     setatsscore(data.atsoptimizationscore)
+                    setJobMatchScore(data.jobDescriptionMatchScore ?? null)
+                    setMissingKeywords(Array.isArray(data.missingKeywords) ? data.missingKeywords : [])
                     setpros(data.pros)
                     setcons(data.cons)
                     setsug(data.suggestions)
@@ -120,10 +124,42 @@ function Analyse() {
                             }}
                         />
                     </div>
+                    {jobMatchScore !== null && <div className={Styles.sc3}>
+                        <Heat
+                            progress={jobMatchScore}
+                            range={{ from: 0, to: 100 }}
+                            sign={{ value: '', position: 'end' }}
+                            showValue={true}
+                            revertBackground={true}
+                            text={'Job description match'}
+                            sx={{
+                                barWidth: 7,
+                                bgColor: ' #2c2c2cb1',
+                                bgStrokeColor: '#ffffff',
+                                valueSize: 13,
+                                textSize: 7,
+                                valueFamily: 'Poppins',
+                                textFamily: 'Poppins',
+                                valueWeight: 'normal',
+                                textWeight: 'normal',
+                                textColor: '#ffffffff',
+                                valueColor: '#ffffffff',
+                                loadingTime: 1000,
+                                strokeLinecap: 'round',
+                                valueAnimation: true,
+                            }}
+                        />
+                    </div>}
 
                 </div>
 
                 <div className={Styles.rev}>
+                    {jobMatchScore !== null && <div className={Styles.missingKeywords}>
+                        <h2>Job requirements to highlight</h2>
+                        {missingKeywords.length > 0 ? <ul>
+                            {missingKeywords.map((item, index) => <li key={index}>{item}</li>)}
+                        </ul> : <p>No clear missing requirements were identified.</p>}
+                    </div>}
                     <div className={Styles.pros}>
                         <h2>Strengths </h2>
                         <ul>

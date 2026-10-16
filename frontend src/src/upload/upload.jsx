@@ -1,6 +1,6 @@
 import { toast } from "react-toastify"
 import Styles from "./upload.module.css"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { UserContext } from "../usercontext.jsx";
 import { useNavigate } from "react-router-dom";
 function Uploadpage() {
@@ -8,6 +8,7 @@ function Uploadpage() {
 
     const { serviceURL } = useContext(UserContext)
     const navigate=useNavigate()
+    const [jobDescriptionLength, setJobDescriptionLength] = useState(0)
     const validate = () => {
         var inp = document.getElementById("resume")
         var file = inp.files[0]
@@ -39,8 +40,8 @@ function Uploadpage() {
         event.preventDefault()
         var uploadform = document.getElementById("upform")
         var formdata = new FormData(uploadform)
-        if (formdata.get("roles").trim() === "") {
-            toast.warn("Role must not be empty")
+        if (formdata.get("roles").trim() === "" && formdata.get("jobDescription").trim() === "") {
+            toast.warn("Enter a target role or paste a job description")
             return;
         }
         if (!formdata.get("file") || !formdata.get("file").name) {
@@ -78,8 +79,19 @@ function Uploadpage() {
             <div className={Styles.uploadcontainer}>
                 <h2>Upload Resume</h2>
                 <form id="upform" encType="multipart/form-data" >
-                    <label className={Styles.uploadcontainerlabel} htmlFor="roles" >Role</label>
+                    <label className={Styles.uploadcontainerlabel} htmlFor="roles" >Target role (optional if you add a job description)</label>
                     <input type="text" autoComplete="off" placeholder="Ex : Software Engineer " name="roles" id="roles" />
+                    <label className={Styles.uploadcontainerlabel} htmlFor="jobDescription">Job description (optional)</label>
+                    <textarea
+                        className={Styles.jobDescription}
+                        name="jobDescription"
+                        id="jobDescription"
+                        rows="8"
+                        maxLength={12000}
+                        placeholder="Paste the job description to get a tailored match score and missing keyword analysis."
+                        onChange={event => setJobDescriptionLength(event.target.value.length)}
+                    />
+                    <span className={Styles.charCount}>{jobDescriptionLength.toLocaleString()} / 12,000 characters</span>
                     <label htmlFor="resume" className={Styles.fileinp}>
                         <p> Upload  your resume here</p>
                         <h5>Select File</h5>

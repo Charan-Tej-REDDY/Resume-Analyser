@@ -18,8 +18,10 @@ public class appController {
     private appService appServices;
 
     @PostMapping("/extract")
-    public ResponseEntity<?> extract(@RequestParam String roles, @RequestParam MultipartFile file) throws TikaException, IOException, InterruptedException {
-        return appServices.extract(roles,file);
+    public ResponseEntity<?> extract(@RequestParam(required = false, defaultValue = "") String roles,
+                                     @RequestParam(required = false, defaultValue = "") String jobDescription,
+                                     @RequestParam MultipartFile file) throws TikaException, IOException, InterruptedException {
+        return appServices.extract(roles, jobDescription, file);
     }
 
     @GetMapping("/lastReport")

@@ -6,7 +6,7 @@
 
 ## Description
 
-Resume Analyzer is a full-stack web application that analyzes resumes using Artificial Intelligence and provides meaningful insights such as skill extraction, resume evaluation, and improvement suggestions.
+Resume Analyzer is a full-stack web application that analyzes resumes using Artificial Intelligence and provides meaningful insights such as skill extraction, resume evaluation, and improvement suggestions. Users can optionally paste a job description to get a tailored match score and a list of missing requirements or keywords.
 
 This project integrates **Google Gemini AI** for resume analysis and includes secure authentication features like email verification and password reset using **Brevo** and job suggestions using **Adzuna API**.
 
@@ -40,6 +40,7 @@ This project integrates **Google Gemini AI** for resume analysis and includes se
 - The frontend UI is developed using **React**
 - For deployment, the React application is **built and served by the Spring Boot backend** as static files
 - The React production build files are placed inside the backend’s **static** directory
+- During analysis, users can enter a target role, paste a job description, or provide both. Job descriptions are limited to 12,000 characters.
 
 ### Static & Template Files
 - The `static` folder contains the **React production build files**

@@ -72,6 +72,30 @@
     width: 20%;
     z-index: 4;
 }
+.sc3{
+    width: 20%;
+    z-index: 4;
+}
+
+.missingKeywords{
+    background-color: #1a1a1ad5;
+    border-radius: 30px;
+    overflow: hidden;
+    width: 90%;
+    margin: 15px 0;
+}
+
+.missingKeywords h2{
+    background: linear-gradient(to right, #92400e, #f59e0b);
+    padding: 10px 15px;
+    color: #ffffff;
+}
+
+.missingKeywords ul,
+.missingKeywords p{
+    padding: 10px 30px;
+    color: #e0e0e0;
+}
 
 .pros,.cons,.sug,.jobs{
 
@@ -284,6 +308,9 @@
 .sc2{
     width: 60%;
 
+}
+.sc3{
+    width: 60%;
 }
 
 .pros,.cons,.sug,.jobs{
